@@ -85,3 +85,45 @@ const sorting = arr => {
 
 
 console.log(sorting(arr))
+
+// 5 Быстрая сортировка
+const part = (arr, inL, inR) => {
+	let pivot = arr[Math.floor((inL + inR) / 2)]
+	let i = inL
+	let j = inR
+	while (i <= j) {
+        while (arr[i] < pivot) {
+            i++
+        }
+        while (arr[j] > pivot) {
+            j--
+        }
+        if (i <= j) {
+            let f = arr[i]
+            arr[i] = arr[j]
+            arr[j] = f
+            i++
+            j--
+        }
+    }
+    return i
+}
+
+const qSort = (arr, inL, inR) => {
+    let index
+    if (arr.length > 1) {
+        index = part(arr, inL, inR)
+        if (inL < index - 1) {
+            qSort(arr, inL, index-1)
+        }
+        if (index < inR) {
+            qSort(arr, index, inR)
+        }
+    }
+    return arr
+}
+
+let result = qSort(arr, 0, arr.length-1)
+console.log(result)
+
+
